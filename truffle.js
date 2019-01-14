@@ -22,8 +22,12 @@ module.exports = {
     development: {
       host: 'localhost',
       port: 8544,
-      network_id: '9',
-      gas: 8000000
+      network_id: '9'
+    },
+    paritydev: {
+      host: 'localhost',
+      port: 8545,
+      network_id: '17'
     },
     "mainnet": {
       network_id: 1,

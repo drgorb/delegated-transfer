@@ -2,6 +2,8 @@ pragma solidity ^0.4.24;
 
 contract Verifier {
 
+    event gasBalance(uint256 gas);
+
     function getSignedHash(string message) public pure returns (bytes32 hash) {
         // The message header; we will fill in the length next
         string memory header = "\x19Ethereum Signed Message:\n000000";
@@ -65,10 +67,10 @@ contract Verifier {
     }
 
     string prefix = "\u0019Ethereum Signed Message:\n32";
-    function verifyTransfer(address to, uint256 value, address token, uint8 v, bytes32 r, bytes32 s)
-            public view returns (address signer) {
+    function transfer(address to, uint256 value, address token, uint8 v, bytes32 r, bytes32 s)
+            public {
         bytes32 paramHash = keccak256(abi.encodePacked(to, value, token));
         bytes32 hash = keccak256(abi.encodePacked(prefix, paramHash));
-        signer = ecrecover(hash, v, r, s);
+        address signer = ecrecover(hash, v, r, s);
     }
 }
